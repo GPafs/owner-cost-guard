@@ -1,0 +1,66 @@
+# --- Terraform ---
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# tfvars may hold sensitive values — keep real ones out, commit only the example
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+
+# Override files are usually local-only
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI config / plan output
+.terraformrc
+terraform.rc
+*.tfplan
+
+# aws lambda invoke output artifact
+response.json
+
+# NOTE: .terraform.lock.hcl is intentionally NOT ignored — commit it.
+
+# --- Lambda / Python ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+*.zip
+dist/
+build/
+
+# --- Secrets / env ---
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*credentials*
+
+# --- Tooling ---
+.infracost/
+
+# --- Claude Code (commit settings.json; keep personal overrides local) ---
+.claude/settings.local.json
+
+# --- Internal / local-only working docs (never publish) ---
+# Planning, direction, and operating notes stay on disk but out of git.
+.internal/
+/CLAUDE.md
+
+# --- Editors / OS ---
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db

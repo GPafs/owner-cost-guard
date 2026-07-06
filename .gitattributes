@@ -1,0 +1,18 @@
+# Normalize line endings: store and check out everything as LF, regardless of
+# contributor OS. Keeps the Lambda (Python), the shell-driven Makefile, and CI
+# (Linux runners) consistent — no CRLF noise in diffs or broken scripts.
+* text=auto eol=lf
+
+# Explicit for the file types this repo uses.
+*.tf     text eol=lf
+*.hcl    text eol=lf
+*.py     text eol=lf
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.md     text eol=lf
+*.json   text eol=lf
+Makefile text eol=lf
+
+# Binary artifacts — never normalize. (Build zips are gitignored; be explicit anyway.)
+*.zip binary
+*.png binary

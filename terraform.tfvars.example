@@ -1,0 +1,26 @@
+# Copy to terraform.tfvars (gitignored) and fill in real values locally.
+# NEVER commit a real terraform.tfvars — placeholders only in this file.
+
+owners_file                   = "owners.yaml"
+notification_email            = "alerts@example.com"
+monthly_budget_amount         = 100
+ownership_schedule            = "cron(0 7 * * ? *)" # daily 07:00 UTC
+enable_cost_anomaly_detection = true
+
+# Optional: notification thresholds (defaults: actual 80/100, forecast 100)
+# budget_thresholds = {
+#   actual_warning   = 80
+#   actual_critical  = 100
+#   forecast_warning = 100
+# }
+
+# Optional: which resource types the ownership Lambda evaluates
+# tag_resource_types = ["s3", "ec2:instance"]
+
+# If your root module passes a default validated tag set, the owner MUST
+# resolve to an id in owners.yaml or the plan will fail by design:
+# tags = {
+#   owner       = "alice@example.com"
+#   cost-center = "cc-1001"
+#   environment = "dev"
+# }
