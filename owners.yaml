@@ -1,0 +1,27 @@
+# owners.yaml — ownership registry (the flat-file identity source).
+#
+# Single source of truth for owner validation. Ownership-as-code: changes go
+# through a pull request, so every re-attestation is an auditable git event.
+# This flat file is the deliberate minimal stand-in for V1; a real identity
+# source (IAM Identity Center, a CMDB feed, ...) swaps in behind the same shape
+# later — see the roadmap. All values here are synthetic placeholders.
+#
+# Each entry:
+#   id             owner identifier (matched against the resource `owner` tag)
+#   team           owning team
+#   cost_center    chargeback code
+#   attested_on    ISO date the ownership was last confirmed
+#   valid_for_days freshness window; attested_on + valid_for_days < today => stale
+
+owners:
+  - id: alice@example.com
+    team: platform
+    cost_center: cc-1001
+    attested_on: 2026-06-01
+    valid_for_days: 180 # current -> resolves to `ok`
+
+  - id: bob@example.com
+    team: data
+    cost_center: cc-1002
+    attested_on: 2025-11-01
+    valid_for_days: 180 # deliberately expired -> demonstrates `stale`
