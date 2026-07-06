@@ -1,0 +1,8 @@
+# Copy to terraform.tfvars (gitignored) and set your real address to receive the
+# SNS confirmation + findings emails. Never commit a real terraform.tfvars.
+notification_email = "you@example.com"
+
+# region = "eu-west-1"
+
+# Enable after the tag keys appear in billing data (~24h after first deploy):
+# enable_cost_allocation_tags = true
