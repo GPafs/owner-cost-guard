@@ -1,0 +1,63 @@
+name: validate
+
+# Read-only quality gate. Re-runs the same checks we run locally on a clean
+# machine for every push and PR. It never touches AWS and needs no credentials —
+# the terraform test mocks the AWS provider. Deployment stays a manual step.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.15.6"
+          terraform_wrapper: false
+
+      - name: Terraform fmt
+        run: terraform fmt -check -recursive
+
+      - name: Terraform init
+        run: terraform init -backend=false
+
+      - name: Terraform validate
+        run: terraform validate
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+        with:
+          tflint_version: v0.63.1
+
+      - name: TFLint
+        # GITHUB_TOKEN avoids rate limits when fetching the AWS ruleset plugin.
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          tflint --init
+          tflint -f compact
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Checkov
+        # Scans the module (the shipped product). examples/ is illustrative demo
+        # code (throwaway tag-carrier buckets) and is excluded.
+        run: |
+          pip install checkov==3.3.1
+          checkov -d . --framework terraform --compact --quiet --skip-path .terraform --skip-path examples
+
+      - name: Terraform test
+        run: terraform test
