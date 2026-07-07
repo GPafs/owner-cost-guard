@@ -11,8 +11,8 @@ Detection, cost-allocation tags) onto a single notification spine.
 
 ## The problem
 
-In every estate I've run, the *owner* tag (if one exists at all) is the thing to rot, and it gets noticed only at the most critical moment, exactly when you need it. 
-Usually set once, it passes every audit and stops being true the day that person changes teams or leaves. Attribution then breaks silently, and nobody notices until finance or change enablement does.
+In every estate I've run, the *owner* tag (if one exists at all) is the first thing to rot.
+Usually set once, it passes every audit and stops being true the day that person changes teams or leaves. Attribution and accountability then break silently, and nobody notices until an incident needs an owner, a change needs an approver, or finance asks who is paying.
 
 This module is version 1 of my approach for closing that gap: **accountability that re-validates itself**, married with native cost controls. 
 
