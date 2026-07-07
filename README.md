@@ -178,6 +178,7 @@ No modules.
 | [aws_iam_policy_document.scheduler_assume](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_iam_policy_document.scheduler_invoke](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 | [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
+| [aws_region.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/region) | data source |
 
 ## Inputs
 
@@ -230,6 +231,8 @@ terraform test        # proves the plan-time gate fails closed
 
 **Future directions:**
 
+- **Dual ownership (next release)**: a business owner and a technical owner per
+  resource, validated and attested independently against the same registry.
 - **Pluggable identity source**: owner resolution sits behind a single seam
   (`FlatFileIdentitySource`); the next step formalizes it into an `IdentitySource`
   interface with an **IAM Identity Center** adapter, making the registry live
